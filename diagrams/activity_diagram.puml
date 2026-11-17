@@ -1,0 +1,98 @@
+@startuml activity_diagram
+
+title Test Case Register
+
+start
+
+repeat
+
+partition dialog {
+    :Display "MAIN MENU\n1. Add test case \n2. List test cases \n0. Exit";
+    :Display "Choose an option:";
+    :Read user input;
+}
+      
+if (Valid option?) then (yes)
+    
+    switch (Option?)
+        
+    case (1. Add test case)
+        partition dialog {
+            :Prompt for title, description, expected result;
+            :Create CreateTestCase record;
+        }
+            
+        partition service {
+            :Normalise information;
+            if (All mandatory fields filled in?) then (yes)
+                :Create TestCase object;
+                
+                partition repository {
+                    if (Test case exists?) then (no)
+                        :Generate id [0..1]{readOnly};
+                        :Save test case to list;
+                        :Return true;
+                    else (yes)
+                        :Return false;
+                    endif
+                }
+
+                if (Added to repository?) then (yes)
+                    :Return TestCaseResult (succeeded = true,\nresult = testCase);
+                else (no)
+                    :Return TestCaseResult (succeeded = false,\nmessage "Test case has already been registered.");
+                endif
+            else (no)
+                :Return TestCaseResult (succeeded = false,\nmessage "Fill in all mandatory fields.");
+            endif
+        }
+            
+        partition dialog {
+            if (TestCaseResult.succeeded?) then (yes)
+                :Display "Test case has been added.";
+                :Display test case information with id.;
+            else (no)
+                :Display TestCaseResult.message;
+            endif
+        }   
+                
+    case (2. List test cases)
+        partition service {
+            partition repository {
+                :Get all test cases;
+            }
+            if (No test case found?) then (yes)
+                :Return TestCaseResult (succeeded = false,\nmessage "No test case found.");
+            else (no)
+                :Return TestCaseResult (succeeded = true,\nresult = testCases);
+            endif
+        }
+
+        partition dialog {
+            if (TestCaseResult.succeeded?) then (yes)
+                while (More test cases in TestCaseResult?) is (yes)
+                    :Get next test case;
+                    :Display test case information;
+                endwhile (no)
+            else (no)
+                :Display TestCaseResult.message;
+            endif
+        }
+            
+    case (0. Exit)
+        partition dialog {
+            :Display "Exiting programme...";
+        }
+        stop
+        
+    endswitch      
+    
+else (no)
+    partition dialog {
+        :Display "Invalid option. Try again.";
+    }
+endif
+
+repeat while (True)
+
+@enduml

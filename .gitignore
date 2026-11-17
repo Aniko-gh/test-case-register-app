@@ -1,0 +1,308 @@
+# ========================================
+# C# / .NET / Visual Studio
+# ========================================
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+artifacts/
+.artifacts/
+AppPackages/
+BundleArtifacts/
+BenchmarkDotNet.Artifacts/
+
+# Visual Studio local settings and cache
+.vs/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.sln.iml
+
+# Generated and temporary project files
+*.tmp_proj
+*_wpftmp.csproj
+*.pidb
+*.svclog
+*.binlog
+MSBuild_Logs/
+
+# NuGet package output
+*.nupkg
+*.snupkg
+
+# Legacy NuGet packages directory
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Test results and coverage
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+TestResult.xml
+nunit-*.xml
+*.VisualState.xml
+
+# ReSharper / Rider / dotCover
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+*.dotCover
+
+# NCrunch
+_NCrunch_*
+.NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# Local Azure Functions settings
+local.settings.json
+
+# Publish output and local publishing settings
+publish/
+*.pubxml
+*.pubxml.user
+*.publishsettings
+*.azurePubxml
+
+# ========================================
+# Python
+# ========================================
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.venv.bak/
+venv.bak/
+__pypackages__/
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Packaging
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+pip-wheel-metadata/
+MANIFEST
+
+# Test, type checking and lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.tox/
+.nox/
+.hypothesis/
+
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# ========================================
+# Node.js / JavaScript / TypeScript
+# ========================================
+
+# Dependencies
+node_modules/
+jspm_packages/
+bower_components/
+
+# Package manager caches
+.npm/
+.pnpm-store/
+
+# Package manager logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Yarn generated files
+.yarn/cache/
+.yarn/unplugged/
+.yarn/install-state.gz
+.yarn/build-state.yml
+.yarn-integrity
+.pnp.*
+
+# Tool caches
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.node_repl_history
+.nyc_output/
+.parcel-cache/
+.vite/
+.turbo/
+
+# Next.js
+.next/
+
+# Nuxt
+.nuxt/
+.output/
+
+# SvelteKit
+.svelte-kit/
+
+# Astro
+.astro/
+
+# Angular
+.angular/cache/
+
+# VitePress
+**/.vitepress/dist/
+**/.vitepress/cache/
+
+# Docusaurus
+.docusaurus/
+
+# Node.js diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Vite temporary configuration files
+vite.config.*.timestamp-*
+
+# Playwright generated output
+playwright-report/
+playwright/.cache/
+blob-report/
+test-results/
+
+# ========================================
+# Java / Maven / Gradle
+# ========================================
+
+# Compiled classes
+*.class
+
+# JVM crash and replay logs
+hs_err_pid*
+replay_pid*
+
+# Maven build output
+target/
+
+# Maven release plugin generated files
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# Gradle cache and local settings
+.gradle/
+.gradletasknamecache
+gradle-app.setting
+
+# Keep Maven and Gradle wrappers
+!**/mvnw
+!**/mvnw.cmd
+!**/.mvn/wrapper/maven-wrapper.jar
+!**/gradlew
+!**/gradlew.bat
+!**/gradle/wrapper/gradle-wrapper.jar
+!**/gradle/wrapper/gradle-wrapper.properties
+
+# ========================================
+# Shared build output, caches and logs
+# ========================================
+
+build/
+dist/
+out/
+coverage/
+.cache/
+logs/
+*.log
+*.tmp
+*.temp
+
+# Preserve source directories named build
+!**/src/**/build/
+
+# ========================================
+# Environment variables
+# ========================================
+
+.env
+.env.*
+
+# Keep templates without secrets
+!.env.example
+!.env.sample
+!.env.template
+
+# ========================================
+# Editors and IDEs
+# ========================================
+
+# JetBrains: IntelliJ IDEA / PyCharm / Rider / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse generated workspace metadata
+.metadata/
+.recommenders/
+
+# VS Code: keep shared project configuration
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Editor history and temporary files
+.history/
+.localhistory/
+.vshistory/
+*.swp
+*.swo
+*~
+
+# ========================================
+# Operating systems
+# ========================================
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/

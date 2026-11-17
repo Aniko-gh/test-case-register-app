@@ -1,0 +1,65 @@
+@startuml class_diagram
+title Test Case Register
+
+skinparam classAttributeIconSize 0
+
+class TestCase {
+    +id : String [0..1] {readOnly}
+    +title : String
+    +description : String
+    +expectedResult : String
+}
+
+class TestCaseResult <<record>> {
+    +result : TestCase[0..*]
+    +succeeded : boolean
+    +message : String [0..1]
+}
+
+class CreateTestCase <<record>> {
+    +title : String
+    +description : String
+    +expectedResult : String
+}
+
+class TestCaseRepository {
+    -testCases : TestCase[0..*]
+    +tryAdd(testCase : TestCase) : boolean
+    +getAll() : TestCase[0..*]
+}
+
+class TestCaseService {
+    -repository : TestCaseRepository
+    +createTestCase(createTestCase : CreateTestCase) : TestCaseResult
+    +getTestCases() : TestCaseResult
+}
+
+class TestCaseDialog {
+    -service : TestCaseService
+    +start() : void
+    +showMenu() : void
+    +createTestCase() : void
+    +listTestCases() : void
+}
+
+class App {
+    -dialog : TestCaseDialog
+    -service : TestCaseService
+    -repository : TestCaseRepository
+    +main() : void
+}
+
+App --> "1" TestCaseDialog 
+App --> "1" TestCaseService
+App --> "1" TestCaseRepository
+TestCaseDialog --> "1" TestCaseService 
+TestCaseService --> "1" TestCaseRepository 
+TestCaseRepository --> "0..*" TestCase
+TestCaseResult --> "0..*" TestCase
+TestCaseDialog ..> TestCaseResult : <<use>>
+TestCaseDialog ..> CreateTestCase : <<create>>
+TestCaseService ..> TestCase : <<create>>
+TestCaseService ..> CreateTestCase : <<use>>
+TestCaseService ..> TestCaseResult : <<create>>
+
+@enduml

@@ -1,0 +1,93 @@
+@startuml sequence_diagram
+title Test Case Register
+
+actor User as User
+boundary TestCaseDialog as Dialog
+control TestCaseService as Service
+entity TestCase as TestCase
+database TestCaseRepository as Repository
+
+activate Dialog
+
+loop Until user chooses to Exit program
+
+    Dialog -> Dialog : showMenu()
+    Dialog -> User : Display "TEST CASE MANAGEMENT\n1. Create Test Case \n2. List Test Cases \n0. Exit"
+    Dialog -> User : Display "Choose an option:"
+
+    User -> Dialog : Enter option
+
+    alt Invalid option
+        Dialog -> User : Display "Invalid option. Try again."
+    else Valid option
+        alt Option 1: Create Test Case
+            Dialog -> Dialog : testCaseRequest()
+            Dialog -> User : Prompt for title, description, expected result
+            User -> Dialog : Provide title, description, expected result
+            Dialog -> Dialog : Create TestCaseRequest record
+            Dialog -> Service : createTestCase(testCaseRequest : TestCaseRequest)
+            activate Service
+            Service -> Service : Normalise information
+                        
+            alt Not all mandatory fields filled in
+                
+                Service --> Dialog : Return TestCaseResult (succeeded = false,\nmessage = "Fill in all mandatory fields.")
+                deactivate Service
+                Dialog -> User : Display TestCaseResult.message
+
+            else All mandatory fields filled in
+                
+                Service -> TestCase ** : New TestCase(title, description, expectedResult)
+                Service -> Repository : tryAdd(testCase : TestCase) : boolean
+                activate Repository
+                
+                alt Test case exists
+                    Repository --> Service : Return false
+                    deactivate Repository
+                    Service --> Dialog : Return TestCaseResult (succeeded = false,\nmessage = "Test case has already been registered.")
+                    deactivate Service
+                    Dialog -> User : Display TestCaseResult.message
+
+                else Test case does not exist
+                    Repository -> Repository : Generate id [0..1]{readOnly}
+                    Repository -> Repository : Save testCase to list
+                    Repository --> Service : Return true
+                    deactivate Repository
+                    Service --> Dialog : Return TestCaseResult (succeeded = true, result = testCase)
+                    deactivate Service
+                    Dialog -> User : Display "Test case has been added."
+                    Dialog -> User : Display test case information with id.
+                end
+            end
+            
+        else Option 2: List Test Cases
+            Dialog -> Dialog : listTestCases()
+            Dialog -> Service : getTestCases() : TestCaseResult
+            activate Service
+            Service -> Repository : getAll() : TestCase[0..*]
+            activate Repository
+            Repository --> Service : TestCase[0..*]
+            deactivate Repository
+
+            alt No test case found
+                Service --> Dialog : Return TestCaseResult (succeeded = false,\nmessage = "No test case found.")
+                deactivate Service
+                Dialog -> User : Display TestCaseResult.message
+
+            else Test cases found
+                Service --> Dialog : Return TestCaseResult (succeeded = true,\nresult = testCases)
+                deactivate Service
+                loop More test cases in TestCaseResult
+                    Dialog -> User : Display test case information
+                end
+            end
+            
+        else Option 0: Exit programme
+            Dialog -> User : Display "Exiting programme..."
+        end
+    end
+end
+
+deactivate Dialog
+
+@enduml
