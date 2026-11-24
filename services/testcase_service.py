@@ -1,16 +1,17 @@
-from repositories.test_case_repository import TestCaseRepository
-from models.test_case_request import TestCaseRequest
-from models.test_case_result import TestCaseResult
-from models.test_case import TestCase
+from repositories.testcase_repository import TestCaseRepository
+from models.testcase_request import TestCaseRequest
+from models.testcase_result import TestCaseResult
+from models.testcase import TestCase
 
 class TestCaseService:
-    def __init__(self, test_case_repository : TestCaseRepository):
-        self.__repository : TestCaseRepository = test_case_repository
+    __test__ = False
+    def __init__(self, testcase_repository : TestCaseRepository):
+        self.__repository : TestCaseRepository = testcase_repository
 
-    def create_test_case(self, test_case_request : TestCaseRequest) -> TestCaseResult:
-        title = test_case_request.title.strip()
-        description = test_case_request.description.strip()
-        expected_result = test_case_request.expected_result.strip()
+    def create_test_case(self, testcase_request : TestCaseRequest) -> TestCaseResult:
+        title = testcase_request.title.strip()
+        description = testcase_request.description.strip()
+        expected_result = testcase_request.expected_result.strip()
 
         if not title or not description or not expected_result:
             return TestCaseResult(succeeded=False, message="Fill in all mandatory fields.")

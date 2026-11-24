@@ -1,6 +1,6 @@
 import os
 import subprocess
-from models.test_case import TestCase
+from models.testcase import TestCase
 
 def clear_screen():
     if os.name == "nt":

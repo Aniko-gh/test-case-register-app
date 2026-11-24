@@ -1,6 +1,6 @@
-from repositories.test_case_repository import TestCaseRepository
-from services.test_case_service import TestCaseService
-from dialogs.test_case_dialog import TestCaseDialog
+from repositories.testcase_repository import TestCaseRepository
+from services.testcase_service import TestCaseService
+from dialogs.testcase_dialog import TestCaseDialog
 
 class App:
     def __init__(self) -> None:

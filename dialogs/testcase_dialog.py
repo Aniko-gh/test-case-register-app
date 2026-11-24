@@ -1,11 +1,12 @@
-from services.test_case_service import TestCaseService
-from models.test_case_request import TestCaseRequest
+from services.testcase_service import TestCaseService
+from models.testcase_request import TestCaseRequest
 
 from utils.console_helper import pause, display_test_case, clear_screen
 
 class TestCaseDialog:
-    def __init__(self, test_case_service : TestCaseService):
-        self.__service : TestCaseService = test_case_service
+    __test__ = False
+    def __init__(self, testcase_service : TestCaseService):
+        self.__service : TestCaseService = testcase_service
 
     def start(self) -> None:
         while True:
