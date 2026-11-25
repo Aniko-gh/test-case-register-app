@@ -48,22 +48,16 @@ class TestCaseDialog:
         print("")
 
         title = self._prompt_mandatory("Enter title: ")
-        #if title is None:
-        #    return
-
+        
         description = self._prompt_mandatory("Enter description: ")
-        #if description is None:
-        #    return
-
+        
         expected_result = self._prompt_mandatory("Enter expected result: ")
-        #if expected_result is None:
-        #    return
-
+        
         test_case_request = TestCaseRequest(title=title, description=description, expected_result=expected_result)
 
         result = self.__service.create_test_case(test_case_request)
 
-        if result.succeeded == False:
+        if not result.succeeded:
             print("")
             print(result.message)
         else:
@@ -82,7 +76,7 @@ class TestCaseDialog:
         
         result = self.__service.get_test_cases()
 
-        if result.succeeded == False:
+        if not result.succeeded:
             print(result.message)
         else:    
             for test_case in result.result:

@@ -7,7 +7,7 @@ class TestCaseRepository:
         self._next_id: int = 1
       
     def try_add(self, test_case : TestCase) -> bool:
-        if any(tc.title == test_case.title for tc in self.__test_cases):
+        if any(tc.title.lower() == test_case.title.lower() for tc in self.__test_cases):
             return False
         
         test_case.id = (f"TC-{self._next_id:03d}")
